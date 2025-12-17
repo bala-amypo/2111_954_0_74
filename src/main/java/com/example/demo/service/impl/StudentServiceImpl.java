@@ -1,3 +1,7 @@
+package com.example.demo.service.impl;
+import java.util.*;
+import org.springframework.stereotype-.Service;
+import com.example.demo.entity.Student;
 @Service
 public class StudentServiceImpl implements StudentService{
       private final Map<Long,Student>store=new Hashmap<>();
@@ -9,5 +13,15 @@ public class StudentServiceImpl implements StudentService{
         return st;
       }
       @Override 
-      public List<Student
+      public List<Student> getAllStudents(){
+          return new ArrayList<>(store.values());
+      }
+      @Override
+      public Optional<Student>getOneStudent(Long id){
+        return Optional.ofNullable(store.get(id));
+      }
+      @Override
+      public void deleteStudent(Long id){
+        store.remove(id);
+      }
 }
