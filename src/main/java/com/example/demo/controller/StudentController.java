@@ -31,10 +31,20 @@ public class Studentcontroller{
         Optional<Student> student=ser.getOneStudent(id);
         if(student.isPresent()){
             newStudent.setId(id);
-        }
+        
         ser.insertStudentity(newStudentity);
         return "Updated Successfully";
+        }
+        return "Id not Found";
     }
-    re
+    @DeleteMapping("/del/{id}")
+    public String deleteStudent(@Pathvariable Long id){
+        Optional<Student>student=ser.getOneStudent(id);
+        if(student.isPresent()){
+            ser.deleteStudent(id);
+            return "Deleted Sucessfully";
+        }
+        return "Id not Found";
+    }
     
 }
