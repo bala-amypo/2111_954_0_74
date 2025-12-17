@@ -23,6 +23,18 @@ public class Studentcontroller{
         return ser.getAllStudent();
     }
     @GetMapping("/get/{id}")
-    public Optional<Student> getStudent(@Pathvariable Long id)
+    public Optional<Student> getStudent(@Pathvariable Long id){
+        return ser.getOneStudent(id);
+    }
+    @PutMapping("/update/{id}")
+    public String updateStudent(@Pathvariable Long id,@RequestBody Student newStudent){
+        Optional<Student> student=ser.getOneStudent(id);
+        if(student.isPresent()){
+            newStudent.setId(id);
+        }
+        ser.insertStudentity(newStudentity);
+        return "Updated Successfully";
+    }
+    re
     
 }
