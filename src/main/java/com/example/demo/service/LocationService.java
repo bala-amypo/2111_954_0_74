@@ -8,4 +8,6 @@ public interface LocationService {
     LocationEntity createLocation(LocationEntity location);
 
     List<LocationEntity> getAllLocations();
+    
+    LocationEntity getLocationById(Long id); // Add this line
 }
