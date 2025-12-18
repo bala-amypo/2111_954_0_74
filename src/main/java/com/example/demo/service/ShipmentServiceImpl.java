@@ -25,9 +25,10 @@ public class ShipmentServiceImpl implements ShipmentService {
     @Override
     public ShipmentEntity createShipment(Long vehicleId, ShipmentEntity shipment) {
 
-        VehicleEntity vehicle = vehicleRepository.findById(vehicleId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Vehicle not found"));
+        VehicleEntity vehicle = vehicleRepository.findById(vehicleId).orElse(null);
+        if (vehicle == null) {
+            return null; // Vehicle not found
+        }
 
         if (shipment.getWeightKg() > vehicle.getCapacityKg()) {
             throw new IllegalArgumentException("Shipment weight exceeds vehicle capacity");
@@ -43,8 +44,6 @@ public class ShipmentServiceImpl implements ShipmentService {
 
     @Override
     public ShipmentEntity getShipmentById(Long shipmentId) {
-        return shipmentRepository.findById(shipmentId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Shipment not found"));
+        return shipmentRepository.findById(shipmentId).orElse(null); // Return null if not found
     }
 }

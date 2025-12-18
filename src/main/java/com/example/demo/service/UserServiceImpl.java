@@ -3,7 +3,6 @@ package com.example.demo.service;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.UserEntity;
-
 import com.example.demo.repository.UserRepository;
 
 @Service
@@ -22,8 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity getUserById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("User not found"));
+        // Return null if user not found
+        return userRepository.findById(id).orElse(null);
     }
 }
