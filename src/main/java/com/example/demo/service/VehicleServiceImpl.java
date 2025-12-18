@@ -25,9 +25,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public VehicleEntity addVehicle(Long userId, VehicleEntity vehicle) {
 
-        UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("User not found"));
+        UserEntity user = userRepository.findById(userId).orElseThrow(() ->new ResourceNotFoundException("User not found"));
 
         if (vehicle.getCapacityKg() <= 0) {
             throw new IllegalArgumentException("Vehicle capacity must be positive");
