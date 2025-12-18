@@ -18,16 +18,20 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public LocationEntity createLocation(LocationEntity location) {
-
         if (location.getLatitude() < -90 || location.getLatitude() > 90) {
             throw new IllegalArgumentException("Invalid latitude value");
         }
-
         return locationRepository.save(location);
     }
 
     @Override
     public List<LocationEntity> getAllLocations() {
         return locationRepository.findAll();
+    }
+
+    @Override
+    public LocationEntity getLocationById(Long id) {
+        // Returns null if not found instead of throwing an exception
+        return locationRepository.findById(id).orElse(null);
     }
 }
